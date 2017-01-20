@@ -41,19 +41,14 @@ find_package(Threads REQUIRED)
 include_directories(${Threads_INClUDE_DIRS})
 target_link_libraries(pixy_java Threads::Threads)
 
-# find_package(Libusb1 REQUIRED)
-# include_directories(${Libusb1_INCLUDE_DIRS})
-# target_link_libraries(pixy_java ${Libusb1_LIBRARIES})
 
-include(FindPkgConfig)
+find_package(Libusb1)
 
-find_package(LibUSB)
-
-if(NOT LIBUSB_FOUND)
-    message(FATAL_ERROR "missing libusb")
+if(NOT LIBUSB1_FOUND)
+    message(FATAL_ERROR "missing Libusb1")
 endif()
-include_directories(${LIBUSB_INCLUDE_DIR})
-target_link_libraries(pixy_java ${LIBUSB_LIBRARIES})
+include_directories(${LIBUSB1_INCLUDE_DIR})
+target_link_libraries(pixy_java ${LIBUSB1_LIBRARIES})
 
 
 #Set the location for library installation -- i.e., /usr/lib in this case
