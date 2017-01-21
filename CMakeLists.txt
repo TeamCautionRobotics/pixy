@@ -6,12 +6,16 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 
 add_definitions(-D__MACOS__)
 
-#Bring the headers, such as Student.h into the project
 include_directories(
-    /opt/local/include/libusb-1.0
+    # System include dir
     /opt/local/include
+
+    #jni.h
     /Library/Java/JavaVirtualMachines/jdk1.8.0_101.jdk/Contents/Home/include
+
+    #jni_md.h
     /Library/Java/JavaVirtualMachines/jdk1.8.0_101.jdk/Contents/Home/include/darwin
+
     src/common/inc
     src/host/libpixyusb/src/utils
     src/host/libpixyusb/include
