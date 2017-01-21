@@ -1,7 +1,7 @@
 public class GetBlocks {
 
     static {
-        System.load("/Users/schuyler/development/pixy/code/build/libpixyusb_swig/_pixy.so");
+        System.load("/Users/schuyler/development/pixy/code/build/libpixy_java.dylib");
     }
 
     public static void main(String[] args) {
