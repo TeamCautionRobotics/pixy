@@ -4,12 +4,10 @@ set(CMAKE_BUILD_TYPE Release)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 
-add_definitions(-D__MACOS__)
+add_definitions(-D__LINUX__)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-strict-aliasing -Wno-error")
 
 include_directories(
-    # System include dir
-    /opt/local/include
-
     #jni.h
     /Library/Java/JavaVirtualMachines/jdk1.8.0_101.jdk/Contents/Home/include
 
@@ -32,7 +30,11 @@ set(SOURCES
 )
 
 add_library(pixy_java SHARED ${SOURCES})
-
+install(TARGETS pixy_java
+    LIBRARY DESTINATION lib
+    ARCHIVE DESTINATION lib
+    RUNTIME DESTINATION bin
+)
 
 find_package(Boost REQUIRED COMPONENTS thread system chrono)
 if(Boost_FOUND)
@@ -53,8 +55,3 @@ if(NOT LIBUSB1_FOUND)
 endif()
 include_directories(${LIBUSB1_INCLUDE_DIR})
 target_link_libraries(pixy_java ${LIBUSB1_LIBRARIES})
-
-
-#Set the location for library installation -- i.e., /usr/lib in this case
-# not really necessary in this example. Use "sudo make install" to apply
-# install(TARGETS testStudent DESTINATION /usr/lib)
